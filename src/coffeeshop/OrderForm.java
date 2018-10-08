@@ -1,9 +1,11 @@
 package coffeeshop;
 
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 public class OrderForm extends javax.swing.JFrame {
     ArrayList<Product> products = new ArrayList<>();
+    DefaultListModel<String> selectedProductsNames = new DefaultListModel<>();
     
     /**
      * Creates new form OrderForm
@@ -47,7 +49,7 @@ public class OrderForm extends javax.swing.JFrame {
         macchiatoItem = new javax.swing.JCheckBox();
         mochacinnoItem = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        productsOrderList = new javax.swing.JList<>();
         addButton = new javax.swing.JButton();
         clearListButton = new javax.swing.JButton();
         removeItemButton = new javax.swing.JButton();
@@ -83,9 +85,14 @@ public class OrderForm extends javax.swing.JFrame {
 
         mochacinnoItem.setText(" (80) Mochaccino");
 
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane1.setViewportView(productsOrderList);
 
         addButton.setText("Add");
+        addButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addButtonActionPerformed(evt);
+            }
+        });
 
         clearListButton.setText("Clear");
 
@@ -222,6 +229,21 @@ public class OrderForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
     
+    /**
+     * Add the selected products onto the orders list.
+     * 
+     * @param evt 
+     */
+    private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
+        for (Product product: products) {
+            if (product.getCheckBox().isSelected()) {
+                selectedProductsNames.addElement(product.getName());
+            }
+        }
+        
+        productsOrderList.setModel(selectedProductsNames);
+    }//GEN-LAST:event_addButtonActionPerformed
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
@@ -238,12 +260,12 @@ public class OrderForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JCheckBox longBlackItem;
     private javax.swing.JCheckBox macchiatoItem;
     private javax.swing.JCheckBox mochacinnoItem;
     private javax.swing.JTextField paymentField;
+    private javax.swing.JList<String> productsOrderList;
     private javax.swing.JButton removeItemButton;
     private javax.swing.JLabel totalLabel;
     private javax.swing.JButton unselectAllButton;
