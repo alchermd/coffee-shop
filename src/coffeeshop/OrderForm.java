@@ -1,12 +1,30 @@
 package coffeeshop;
 
-public class OrderForm extends javax.swing.JFrame {
+import java.util.ArrayList;
 
+public class OrderForm extends javax.swing.JFrame {
+    ArrayList<Product> products = new ArrayList<>();
+    
     /**
      * Creates new form OrderForm
      */
     public OrderForm() {
         initComponents();
+        initProducts();
+    }
+    
+    /**
+     * Initialize the products ArrayList.
+     */
+    private void initProducts() {
+        products.add(new Product("Caffe Latte",  50, caffeLatteItem));
+        products.add(new Product("Cappucino",    50, cappucinoItem));
+        products.add(new Product("Espresso",     60, espressoItem));
+        products.add(new Product("Flat White",   90, flatWhiteItem));
+        products.add(new Product("Long Black",   50, longBlackItem));
+        products.add(new Product("Macchiato",    60, macchiatoItem));
+        products.add(new Product("Mochacinno",   80, mochacinnoItem));
+        products.add(new Product("Irish Coffee", 90, irishCoffeeItem));
     }
 
     /**
