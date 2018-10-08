@@ -339,6 +339,11 @@ public class OrderForm extends javax.swing.JFrame {
      * @param evt 
      */
     private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutButtonActionPerformed
+        if (selectedProductsNames.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Please select items first.");
+            return;
+        }
+        
         try {
             int payment = Integer.parseInt(paymentField.getText());
             int total = computeTotal();
