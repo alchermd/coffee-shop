@@ -28,6 +28,15 @@ public class OrderForm extends javax.swing.JFrame {
         products.add(new Product("Mochacinno",   80, mochacinnoItem));
         products.add(new Product("Irish Coffee", 90, irishCoffeeItem));
     }
+    
+    /**
+     * Unselect all products.
+     */
+    private void unselectAll() {
+        for (Product product: products) {
+            product.getCheckBox().setSelected(false);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -99,6 +108,11 @@ public class OrderForm extends javax.swing.JFrame {
         removeItemButton.setText("Remove");
 
         unselectAllButton.setText("Unselect All");
+        unselectAllButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                unselectAllButtonActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Total:");
 
@@ -242,7 +256,17 @@ public class OrderForm extends javax.swing.JFrame {
         }
         
         productsOrderList.setModel(selectedProductsNames);
+        unselectAll();
     }//GEN-LAST:event_addButtonActionPerformed
+    
+    /**
+     * Unselect all products.
+     * 
+     * @param evt 
+     */
+    private void unselectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unselectAllButtonActionPerformed
+        unselectAll();
+    }//GEN-LAST:event_unselectAllButtonActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
