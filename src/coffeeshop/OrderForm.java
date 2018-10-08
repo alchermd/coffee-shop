@@ -106,6 +106,11 @@ public class OrderForm extends javax.swing.JFrame {
         clearListButton.setText("Clear");
 
         removeItemButton.setText("Remove");
+        removeItemButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeItemButtonActionPerformed(evt);
+            }
+        });
 
         unselectAllButton.setText("Unselect All");
         unselectAllButton.addActionListener(new java.awt.event.ActionListener() {
@@ -267,6 +272,22 @@ public class OrderForm extends javax.swing.JFrame {
     private void unselectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_unselectAllButtonActionPerformed
         unselectAll();
     }//GEN-LAST:event_unselectAllButtonActionPerformed
+
+    /**
+     * Remove an item from the orders list.
+     * 
+     * @param evt 
+     */
+    private void removeItemButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeItemButtonActionPerformed
+        int selectedProductIndex = productsOrderList.getSelectedIndex();
+        
+        if (selectedProductIndex < 0) {
+            return;
+        }
+        
+        selectedProductsNames.remove(selectedProductIndex);
+        productsOrderList.setModel(selectedProductsNames);
+    }//GEN-LAST:event_removeItemButtonActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
