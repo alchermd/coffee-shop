@@ -37,6 +37,24 @@ public class OrderForm extends javax.swing.JFrame {
             product.getCheckBox().setSelected(false);
         }
     }
+    
+    
+    /**
+     * Compute the total price of the products ordered.
+     */
+    private void computeTotal() {
+        int total = 0;
+        for (int i = 0; i < selectedProductsNames.size(); i++) {
+            for (int j = 0; j < products.size(); j++) {
+                if (products.get(j).getName().equals(selectedProductsNames.get(i))) {
+                    total += products.get(j).getPrice();
+                }
+            }
+        }
+        
+        totalLabel.setText(Integer.toString(total));
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -267,6 +285,7 @@ public class OrderForm extends javax.swing.JFrame {
         
         productsOrderList.setModel(selectedProductsNames);
         unselectAll();
+        computeTotal();
     }//GEN-LAST:event_addButtonActionPerformed
     
     /**
@@ -292,6 +311,7 @@ public class OrderForm extends javax.swing.JFrame {
         
         selectedProductsNames.remove(selectedProductIndex);
         productsOrderList.setModel(selectedProductsNames);
+        computeTotal();
     }//GEN-LAST:event_removeItemButtonActionPerformed
     
     /**
@@ -302,6 +322,8 @@ public class OrderForm extends javax.swing.JFrame {
     private void clearListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearListButtonActionPerformed
         selectedProductsNames.clear();
         productsOrderList.setModel(selectedProductsNames);
+        
+        computeTotal();
     }//GEN-LAST:event_clearListButtonActionPerformed
     
 
