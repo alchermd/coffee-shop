@@ -2,6 +2,7 @@ package coffeeshop;
 
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 public class OrderForm extends javax.swing.JFrame {
     ArrayList<Product> products = new ArrayList<>();
@@ -42,7 +43,7 @@ public class OrderForm extends javax.swing.JFrame {
     /**
      * Compute the total price of the products ordered.
      */
-    private void computeTotal() {
+    private int computeTotal() {
         int total = 0;
         for (int i = 0; i < selectedProductsNames.size(); i++) {
             for (int j = 0; j < products.size(); j++) {
@@ -53,6 +54,7 @@ public class OrderForm extends javax.swing.JFrame {
         }
         
         totalLabel.setText(Integer.toString(total));
+        return total;
     }
 
 
@@ -149,6 +151,11 @@ public class OrderForm extends javax.swing.JFrame {
         totalLabel.setText("0");
 
         checkoutButton.setText("Checkout");
+        checkoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                checkoutButtonActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Your change is:");
 
@@ -325,6 +332,33 @@ public class OrderForm extends javax.swing.JFrame {
         
         computeTotal();
     }//GEN-LAST:event_clearListButtonActionPerformed
+    
+    /**
+     * Accept the payment and compute the change.
+     * 
+     * @param evt 
+     */
+    private void checkoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkoutButtonActionPerformed
+        try {
+            int payment = Integer.parseInt(paymentField.getText());
+            int total = computeTotal();
+            
+            if (payment < total) {
+                JOptionPane.showMessageDialog(this, "Insufficient amount.");
+                return;
+            }
+            
+            int change = payment - total;
+            
+            if (change == 0) { 
+                changeField.setText("Exact Bill");
+            } else {  
+                changeField.setText(Integer.toString(change));
+            }
+        } catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Can't process payment. Please enter a valid amount.");
+        }
+    }//GEN-LAST:event_checkoutButtonActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
